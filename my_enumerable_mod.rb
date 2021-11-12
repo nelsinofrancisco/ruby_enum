@@ -15,4 +15,33 @@ module MyEnumerable
 
     return value
   end
+
+  def any?
+    return unless block_given?
+    value = false
+    
+    if self.class.rules[0][1] = 'array'
+      self.instance_variable_get(self.class.rules[0][0]).each do |elem|
+        value = true if yield elem
+        break if value == true
+      end      
+    end
+
+    return value    
+
+  end
+
+  def filter
+    return unless block_given?
+    value = []
+    
+    if self.class.rules[0][1] = 'array'
+      self.instance_variable_get(self.class.rules[0][0]).each do |elem|
+        value.push(elem) if yield elem
+      end      
+    end
+
+    return value    
+
+  end  
 end
