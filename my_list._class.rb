@@ -1,21 +1,25 @@
-require_relative = './my_enumarable_mod.rb'
+require_relative 'my_enumerable_mod'
 
 class Mylist
-  extend MyEnumerable
+  include MyEnumerable
 
-  @list
+  attr_accessor :list, :name
+
+  @rules = [[:@list, :array, :not_null]]
 
   def initialize(*list)
     @list = list
   end
   
   def each
+    return unless block_given?
+
     @list.each do |i| 
       yield i
     end
   end
 end
 
-test = Mylist.new(1,2,3,4,5)
+list = Mylist.new(1,2,3,4)
 
-test.each {|elem| puts "I am yielding something very cool... Rocket nº: #{elem}"}
+puts list.all? {|e| e < 5}
