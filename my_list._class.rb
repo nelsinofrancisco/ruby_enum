@@ -1,6 +1,6 @@
 require_relative 'my_enumerable_mod'
 
-class Mylist
+class MyList
   include MyEnumerable
 
   attr_accessor :list, :name
