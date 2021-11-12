@@ -5,25 +5,23 @@ class Mylist
 
   attr_accessor :list, :name
 
-  @rules = [[:@list, :array, :not_null]]
+  @rules = [[:@list, 'array', :not_null]]
 
   def initialize(*list)
     @list = list
   end
-  
-  def each
+
+  def each(&block)
     return unless block_given?
 
-    @list.each do |i| 
-      yield i
-    end
+    @list.each(&block)
   end
 end
 
-list = Mylist.new(1,2,3,4)
+list = Mylist.new(1, 2, 3, 4)
 
-puts list.all? {|e| e < 5}
+puts(list.all? { |e| e < 5 })
 
-puts list.any? { |e| e == 2 }
+puts(list.any? { |e| e == 2 })
 
-puts list.filter {|e| e.even?}
+p(list.filter(&:even?))
